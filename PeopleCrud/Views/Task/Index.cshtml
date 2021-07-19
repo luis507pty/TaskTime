@@ -1,0 +1,15 @@
+﻿@model  List<Task>
+
+
+@{
+    ViewBag.Title = "TaskTime";
+}
+
+<div class="container">
+    @Html.Partial("_Busqueda")
+</div>
+
+<div class="pb-4 h-100" id="tab-contend">
+    @Html.Partial("_Tabla", Model)
+</div>
+

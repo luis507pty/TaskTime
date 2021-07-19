@@ -1,0 +1,81 @@
+﻿
+@model  List<Task>
+
+
+<section class="card bg-dark table-responsive mt-5 h-100 pb-2 sticky-top contain" style="background-color: #ffffff05 !important;  margin-top:0px;">
+    <div id="delete-token">@Html.AntiForgeryToken()</div>
+    @if (Model.Count != 0)
+    {
+        <div class="card-header">
+            <div class="d-flex justify-content-end">
+             <a href="#"> Ir a Home</a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table class="table mt-0">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var task in Model)
+                    {
+
+                        <tr class="card-row">
+
+                            <td>@task.Nombre</td>
+                            <td class="text-wrap"> @task.Descripcion </td>
+                            <td>
+                                @Ajax.ActionLink("Eliminar", "Delete", "Task",
+
+                         new AjaxOptions()
+                         {
+                             OnBegin = "Delete("+task.Id+")",
+                             Confirm = "¿Estas seguro que quieres eliminar este youtuber?"
+                         }, new { @class = "btn btn-dark" })
+                                ||
+
+                                @Ajax.ActionLink("Actualizar", "", "Task",
+
+                        new AjaxOptions()
+                        {
+                            Url = "/Task/GetById?id=" + task.Id,
+                            HttpMethod = "POST",
+                            UpdateTargetId = "div-form",
+                            OnBegin= "formfocus()",
+                            InsertionMode = InsertionMode.Replace,
+
+                        }, new { @class = "btn btn-dark" })
+                            </td>
+
+                        </tr>
+
+                    }
+
+
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    }
+    else
+    {
+
+        @Html.Partial("_ListaVacia")
+    }
+
+</section>
+
+
+
+

@@ -1,0 +1,113 @@
+﻿
+
+
+section {
+    height: 850px;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    background-color: #1b192e;
+}
+
+.insert-div {
+    height: 100%;
+    height: 75%;
+    border: 30px;
+    background-color: #ffffff05 !important
+}
+
+tr {
+    background-color: #6293b9e6;
+    color: white;
+} 
+
+tr:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+
+
+thead tr th {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background-color: #284890 !important;
+    color: white !important;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #284890;
+    border-color: #284890;
+}
+
+
+.btn-yellow {
+    background-color: yellow;
+}
+
+
+
+.card-radius {
+    border: 0 solid transparent;
+    border-radius: 30px;
+}
+
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    height: 82%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #ffff00;
+    border-bottom: 0 solid transparent;
+}
+
+
+
+/* Estilos del contenedor */
+.contain {
+    overflow: auto;
+}
+
+    .contain::-webkit-scrollbar {
+        width: 8px; /* Tamaño del scroll en vertical */
+        height: 8px; /* Tamaño del scroll en horizontal */
+    }
+
+    /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+    .contain::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+
+        /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+        .contain::-webkit-scrollbar-thumb:hover {
+            background: #b3b3b3;
+            box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cambiamos el fondo cuando esté en active */
+        .contain::-webkit-scrollbar-thumb:active {
+            background-color: #999999;
+        }
+
+    /* Ponemos un color de fondo y redondeamos las esquinas del track */
+    .contain::-webkit-scrollbar-track {
+        background: #e1e1e1;
+        border-radius: 4px;
+    }
+
+        /* Cambiamos el fondo cuando esté en active o hover */
+        .contain::-webkit-scrollbar-track:hover,
+        .contain::-webkit-scrollbar-track:active {
+            background: #d4d4d4;
+        }
