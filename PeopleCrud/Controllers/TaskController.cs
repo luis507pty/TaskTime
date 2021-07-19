@@ -22,7 +22,7 @@ namespace PeopleCrud.Controllers
         public ActionResult Index()
         {
             return View(_taskRepository.GetAll());
-        } 
+        }
 
         [HttpPost]
         public PartialViewResult GetById([Bind(Include = "id")] int id)
@@ -30,52 +30,50 @@ namespace PeopleCrud.Controllers
             var tarea = _taskRepository.GetById(id);
             var view = new TaskViewValidation() { Nombre = tarea.Nombre, Descripcion = tarea.Descripcion, id = tarea.Id };
             return PartialView("_Update", view);
-        }  
+        }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Create([Bind(Include ="Nombre,Descripcion,Id" )]TaskViewValidation add )
+        public JsonResult Create([Bind(Include = "Nombre,Descripcion,Id")] TaskViewValidation add)
         {
             if (ModelState.IsValid)
             {
-                var create = new Task() { Nombre = add.Nombre, Descripcion = add.Descripcion };
-                var resul = _taskRepository.Create(create);
-                if (resul)
-                {
-                    _answer.IsDone = true; _answer.mensaje = "Tarea creada";
-                    return Json(_answer);
-                }
-                else
-                {
-                    _answer.IsDone = false; _answer.mensaje = "Error";
-                    return Json(_answer);
-                }
+                var create = new Task()  { Nombre = add.Nombre, Descripcion = add.Descripcion };
+                var resul = _taskRepository.Create(create); 
 
+                if (resul) {  
+                    _answer.IsDone = true;  
+                    _answer.mensaje = "Tarea creada";  
+                } 
+                else { 
+                    _answer.IsDone = false; 
+                    _answer.mensaje = "Error";  
+                }
             }
-            else
-            {
-                _answer.IsDone = false; _answer.mensaje = "Datos invilidos";
-                return Json(_answer);
-            }
+            else { _answer.IsDone = false; _answer.mensaje = "Datos invilidos"; }
+
+            return Json(_answer);
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Delete([Bind(Include = "id")] int id)
         {
-           var result = _taskRepository.Delete(id);
-            if (result)  
-            {  
-                _answer.IsDone = true; 
-                _answer.mensaje="Tarea Eliminada";
-                return Json(_answer); 
+            var result = _taskRepository.Delete(id);
+            if (result)
+            {
+                _answer.IsDone = true;
+                _answer.mensaje = "Tarea Eliminada";
             }
-            else {
+            else
+            {
                 _answer.IsDone = false;
                 _answer.mensaje = "Error";
-                return Json(_answer);
             }
+
+            return Json(_answer);
         }
 
         [HttpPost]
@@ -87,24 +85,23 @@ namespace PeopleCrud.Controllers
             {
                 var create = new Task() { Nombre = update.Nombre, Descripcion = update.Descripcion, Id = update.id };
                 var result = _taskRepository.Update(create);
+
                 if (result)
                 {
-                    _answer.IsDone = true; _answer.mensaje = "Tarea actualizada";
-                    return Json(_answer);
+                    _answer.IsDone = true;
+                    _answer.mensaje = "Tarea actualizada";
                 }
                 else
                 {
-                    _answer.IsDone = false; _answer.mensaje = "Error";
-                    return Json(_answer);
+                    _answer.IsDone = false;
+                    _answer.mensaje = "Error";
                 }
             }
-            else
-            {
-                _answer.IsDone = false; _answer.mensaje = "Datos invilidos";
-                return Json(_answer);
-            }
-        }
+            else { _answer.IsDone = false; _answer.mensaje = "Datos invilidos"; }
+            
 
+            return Json(_answer);
+        }
 
 
 
