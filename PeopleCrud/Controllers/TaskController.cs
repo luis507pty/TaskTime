@@ -103,8 +103,6 @@ namespace PeopleCrud.Controllers
             return Json(_answer);
         }
 
-
-
         public PartialViewResult ViewCreateForm()
         {
             return PartialView("_Create", new TaskViewValidation());
