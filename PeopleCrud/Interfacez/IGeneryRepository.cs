@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace PeopleCrud.Interfacez
 {
-    public interface IRepository<T>
+    public interface IGeneryRepository<TEntity> where TEntity : class
     {
         //Crud(Operaciones basicas para manipular tablas de mi base de datos)
-        List<T> GetAll();
-        T GetById(int id);
-        bool Create(T modelo);
+        List<TEntity> GetAll();
+        TEntity GetById(int id);
+        bool Create(TEntity modelo);
         bool Delete(int id);
-        bool Update(T modelo);
+        bool Update(TEntity modelo);
     }
 }

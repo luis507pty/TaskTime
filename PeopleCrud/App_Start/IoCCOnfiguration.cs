@@ -29,9 +29,9 @@ public class IoCConfiguration
           .As<TaskTimeEntities>().InstancePerRequest();
 
         //Instacia del TaskRepository
-        builder.RegisterType<TaskRepository>()
-             .As<TaskRepository>().InstancePerRequest();
-        //Instacia del TaskRepository
+        builder.RegisterType<GeneryRepository<Task>>()
+             .As<GeneryRepository<Task>>().InstancePerRequest();
+        //Instacia de la respuesta
         builder.RegisterType<Answer>()
              .As<Answer>().InstancePerRequest();
     }

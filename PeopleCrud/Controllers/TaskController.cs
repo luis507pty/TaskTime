@@ -12,16 +12,16 @@ namespace PeopleCrud.Controllers
 {
     public class TaskController : Controller
     {
-        private TaskRepository _taskRepository;
+        private GeneryRepository<Task> _taskRepository;
         private Answer _answer;
-        public TaskController(TaskRepository taskRepository, Answer answer)
+        public TaskController(GeneryRepository<Task> taskRepository, Answer answer)
         {
             _taskRepository = taskRepository;
             _answer = answer;
         }
         public ActionResult Index()
         {
-            return View(_taskRepository.GetAll());
+            return View(_taskRepository.GetAll().OrderBy(x=> x.Id).ToList());
         }
 
         [HttpPost]

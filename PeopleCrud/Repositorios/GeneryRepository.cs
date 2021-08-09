@@ -6,28 +6,26 @@ using System.Linq;
 using System.Web;
 namespace PeopleCrud.Repositorios
 {
-    public class TaskRepository : IRepository<Task>
+    public class GeneryRepository<TEntity>: IGeneryRepository<TEntity> where TEntity : class
     {
         private readonly TaskTimeEntities _Context; 
-        public TaskRepository( TaskTimeEntities context)
+        public GeneryRepository( TaskTimeEntities context)
         {
             _Context = context;
         }
-        public List<Task> GetAll()
+        public List<TEntity> GetAll()
         {
-            return _Context.Task.OrderByDescending(x=>x.Id).ToList();
+            return _Context.Set<TEntity>().ToList();
         }
-        public Task GetById(int id)
+        public TEntity GetById(int id)
         { 
-            return _Context.Task.Where(x => x.Id == id).FirstOrDefault();
+            return _Context.Set<TEntity>().Find(id);
         }
-        public bool Update(Task modelo)
+        public bool Update(TEntity modelo)
         {
             try
             {
-                var old = _Context.Task.Find(modelo.Id);
-                old.Nombre = modelo.Nombre;
-                old.Descripcion = modelo.Descripcion;
+                _Context.Entry(modelo).State = System.Data.Entity.EntityState.Modified; 
                 _Context.SaveChanges();
                 return true;
             }
@@ -43,8 +41,8 @@ namespace PeopleCrud.Repositorios
         {
             try
             {
-               var delete = _Context.Task.Find(id);
-                _Context.Task.Remove(delete);
+                var delete = GetById(id);
+                _Context.Set<TEntity>().Remove(delete);
                 _Context.SaveChanges();
                 return true;
             }
@@ -53,11 +51,11 @@ namespace PeopleCrud.Repositorios
                 return false;
             }
         }
-        public bool Create(Task modelo)
+        public bool Create(TEntity modelo)
         {
             try
             {
-               _Context.Task.Add(modelo);
+               _Context.Set<TEntity>().Add(modelo);
                _Context.SaveChanges();
                 return true;
             }
